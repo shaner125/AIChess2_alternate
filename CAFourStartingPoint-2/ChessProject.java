@@ -71,61 +71,61 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
         // Setting up the Initial Chess board.
 
-  	for(int i=8;i < 16; i++){
-       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
-			panels = (JPanel)chessBoard.getComponent(i);
-	        panels.add(pieces);
-		}
-		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
-		panels = (JPanel)chessBoard.getComponent(0);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
-		panels = (JPanel)chessBoard.getComponent(1);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
-		panels = (JPanel)chessBoard.getComponent(6);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
-		panels = (JPanel)chessBoard.getComponent(2);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
-		panels = (JPanel)chessBoard.getComponent(5);
-	    panels.add(pieces);
+//  	for(int i=8;i < 16; i++){
+//       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
+//			panels = (JPanel)chessBoard.getComponent(i);
+//	        panels.add(pieces);
+//		}
+//		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
+//		panels = (JPanel)chessBoard.getComponent(0);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
+//		panels = (JPanel)chessBoard.getComponent(1);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
+//		panels = (JPanel)chessBoard.getComponent(6);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
+//		panels = (JPanel)chessBoard.getComponent(2);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
+//		panels = (JPanel)chessBoard.getComponent(5);
+//	    panels.add(pieces);
 		pieces = new JLabel( new ImageIcon("WhiteKing.png") );
 		panels = (JPanel)chessBoard.getComponent(3);
 	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
-		panels = (JPanel)chessBoard.getComponent(4);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
-		panels = (JPanel)chessBoard.getComponent(7);
-	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
+//		panels = (JPanel)chessBoard.getComponent(4);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
+//		panels = (JPanel)chessBoard.getComponent(7);
+//	    panels.add(pieces);
 		for(int i=48;i < 56; i++){
        		pieces = new JLabel( new ImageIcon("BlackPawn.png") );
 			panels = (JPanel)chessBoard.getComponent(i);
 	        panels.add(pieces);
 		}
-		pieces = new JLabel( new ImageIcon("BlackRook.png") );
-		panels = (JPanel)chessBoard.getComponent(56);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
-		panels = (JPanel)chessBoard.getComponent(57);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
-		panels = (JPanel)chessBoard.getComponent(62);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
-		panels = (JPanel)chessBoard.getComponent(58);
-	    panels.add(pieces);
-		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
-		panels = (JPanel)chessBoard.getComponent(61);
-	    panels.add(pieces);
-		  pieces = new JLabel( new ImageIcon("BlackKing.png") );
-		  panels = (JPanel)chessBoard.getComponent(59);
-	    panels.add(pieces);
-		  pieces = new JLabel( new ImageIcon("BlackQueen.png") );
-		  panels = (JPanel)chessBoard.getComponent(60);
-	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("BlackRook.png") );
+//		panels = (JPanel)chessBoard.getComponent(56);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
+//		panels = (JPanel)chessBoard.getComponent(57);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
+//		panels = (JPanel)chessBoard.getComponent(62);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
+//		panels = (JPanel)chessBoard.getComponent(58);
+//	    panels.add(pieces);
+//		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
+//		panels = (JPanel)chessBoard.getComponent(61);
+//	    panels.add(pieces);
+//		  pieces = new JLabel( new ImageIcon("BlackKing.png") );
+//		  panels = (JPanel)chessBoard.getComponent(59);
+//	    panels.add(pieces);
+//		  pieces = new JLabel( new ImageIcon("BlackQueen.png") );
+//		  panels = (JPanel)chessBoard.getComponent(60);
+//	    panels.add(pieces);
 		  pieces = new JLabel( new ImageIcon("BlackRook.png") );
 		  panels = (JPanel)chessBoard.getComponent(63);
 	    panels.add(pieces);
@@ -179,6 +179,7 @@ private Stack getWhitePawnSquares(int x, int y, String piece){
     }
 
   }
+
   else{
     Square tmp = new Square(x, tempy1, piece);
     Square tmp1 = new Square(tempx1, tempy1, piece);
@@ -202,6 +203,67 @@ private Stack getWhitePawnSquares(int x, int y, String piece){
   }
   return moves;
 }
+
+  private Stack getBlackPawnSquares(int x, int y, String piece){
+    Square startingSquare = new Square(x, y, piece);
+    Stack moves = new Stack();
+    Move validM, validM2, validM3, validM4;
+    int tempy1 = y-1;
+    int tempy2 = y-2;
+    int tempx1 = x+1;
+    int tempx2 = x-1;
+
+    if(startingSquare.getYC() == 6){
+      Square tmp = new Square(tempx1, tempy1, piece);
+      Square tmp1 = new Square(tempx2, tempy1, piece);
+      Square tmp2 = new Square(x, tempy1, piece);
+      Square tmp3 = new Square(x, tempy2, piece);
+
+      validM = new Move(startingSquare, tmp);
+      validM2 = new Move(startingSquare, tmp1);
+      validM3 = new Move(startingSquare, tmp2);
+      validM4 = new Move(startingSquare, tmp3);
+
+      if(returnName(((tmp.getXC()*75)+20),(tmp.getYC()*75)+20).contains("White")){
+        moves.push(validM);
+      }
+      if(returnName(((tmp1.getXC()*75)+20),(tmp1.getYC()*75)+20).contains("White")) {
+        moves.push(validM2);
+      }
+
+
+      if(!piecePresent(((tmp2.getXC()*75)+20), (((tmp2.getYC()*75)+20)))){
+        moves.push(validM3);
+      }
+      if(!piecePresent(((tmp2.getXC()*75)+20), (((tmp2.getYC()*75)+20))) && !piecePresent(((tmp3.getXC()*75)+20), (((tmp3.getYC()*75)+20)))){
+        moves.push(validM4);
+      }
+
+    }
+
+    else{
+      Square tmp = new Square(x, tempy1, piece);
+      Square tmp1 = new Square(tempx1, tempy1, piece);
+      Square tmp2 = new Square(tempx2, tempy1, piece);
+
+      validM = new Move(startingSquare, tmp1);
+      validM2 = new Move(startingSquare, tmp2);
+      validM3 = new Move(startingSquare, tmp);
+
+      if(returnName(((tmp1.getXC()*75)+20),(tmp1.getYC()*75)+20).contains("White")){
+        moves.push(validM);
+
+      }
+      if(returnName(((tmp2.getXC()*75)+20),(tmp2.getYC()*75)+20).contains("White")){
+        moves.push(validM2);
+      }
+
+      if(!piecePresent(((tmp.getXC()*75)+20), (((tmp.getYC()*75)+20)))){
+        moves.push(validM3);
+      }
+    }
+    return moves;
+  }
 
   private String returnName(int xPos, int yPos) {
     Component c1 = chessBoard.findComponentAt(xPos, yPos);
@@ -327,8 +389,15 @@ private Stack getKingSquares(int x, int y, String piece){
         moves.push(validM);
       }
       else{
-        if(checkWhiteOponent(((tmp.getXC()*75)+20), (((tmp.getYC()*75)+20)))){
+        if(piece.contains("White")){
+        if(checkWhiteOponent(((tmp.getXC()*75)+20), (((tmp.getYC()*75)+20)))) {
           moves.push(validM);
+        }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp.getXC()*75)+20), (((tmp.getYC()*75)+20)))) {
+            moves.push(validM);
+          }
         }
       }
     }
@@ -339,8 +408,15 @@ private Stack getKingSquares(int x, int y, String piece){
           moves.push(validM2);
         }
         else{
-          if(checkWhiteOponent(((tmp1.getXC()*75)+20), (((tmp1.getYC()*75)+20)))){
-            moves.push(validM2);
+          if(piece.contains("White")){
+            if(checkWhiteOponent(((tmp1.getXC()*75)+20), (((tmp1.getYC()*75)+20)))) {
+              moves.push(validM2);
+            }
+          }
+          else if (piece.contains("Black")){
+            if(checkBlackOponent(((tmp1.getXC()*75)+20), (((tmp1.getYC()*75)+20)))) {
+              moves.push(validM2);
+            }
           }
         }
       }
@@ -352,9 +428,15 @@ private Stack getKingSquares(int x, int y, String piece){
           moves.push(validM3);
         }
         else{
-          System.out.println("The values that we are going to be looking at are : "+((tmp2.getXC()*75)+20)+" and the y value is : "+((tmp2.getYC()*75)+20));
-          if(checkWhiteOponent(((tmp2.getXC()*75)+20), (((tmp2.getYC()*75)+20)))){
-            moves.push(validM3);
+          if(piece.contains("White")){
+            if(checkWhiteOponent(((tmp2.getXC()*75)+20), (((tmp2.getYC()*75)+20)))) {
+              moves.push(validM3);
+            }
+          }
+          else if (piece.contains("Black")){
+            if(checkBlackOponent(((tmp2.getXC()*75)+20), (((tmp2.getYC()*75)+20)))) {
+              moves.push(validM3);
+            }
           }
         }
       }
@@ -370,8 +452,15 @@ private Stack getKingSquares(int x, int y, String piece){
         moves.push(validM);
       }
       else{
-        if(checkWhiteOponent(((tmp3.getXC()*75)+20), (((tmp3.getYC()*75)+20)))){
-          moves.push(validM);
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp3.getXC()*75)+20), (((tmp3.getYC()*75)+20)))) {
+            moves.push(validM);
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp3.getXC()*75)+20), (((tmp3.getYC()*75)+20)))) {
+            moves.push(validM);
+          }
         }
       }
     }
@@ -382,8 +471,15 @@ private Stack getKingSquares(int x, int y, String piece){
           moves.push(validM2);
         }
         else{
-          if(checkWhiteOponent(((tmp4.getXC()*75)+20), (((tmp4.getYC()*75)+20)))){
-            moves.push(validM2);
+          if(piece.contains("White")){
+            if(checkWhiteOponent(((tmp4.getXC()*75)+20), (((tmp4.getYC()*75)+20)))) {
+              moves.push(validM2);
+            }
+          }
+          else if (piece.contains("Black")){
+            if(checkBlackOponent(((tmp4.getXC()*75)+20), (((tmp4.getYC()*75)+20)))) {
+              moves.push(validM2);
+            }
           }
         }
       }
@@ -395,8 +491,15 @@ private Stack getKingSquares(int x, int y, String piece){
           moves.push(validM3);
         }
         else{
-          if(checkWhiteOponent(((tmp5.getXC()*75)+20), (((tmp5.getYC()*75)+20)))){
-            moves.push(validM3);
+          if(piece.contains("White")){
+            if(checkWhiteOponent(((tmp5.getXC()*75)+20), (((tmp5.getYC()*75)+20)))) {
+              moves.push(validM3);
+            }
+          }
+          else if (piece.contains("Black")){
+            if(checkBlackOponent(((tmp5.getXC()*75)+20), (((tmp5.getYC()*75)+20)))) {
+              moves.push(validM3);
+            }
           }
         }
       }
@@ -411,8 +514,15 @@ private Stack getKingSquares(int x, int y, String piece){
         moves.push(validM2);
       }
       else{
-        if(checkWhiteOponent(((tmp7.getXC()*75)+20), (((tmp7.getYC()*75)+20)))){
-          moves.push(validM2);
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp7.getXC()*75)+20), (((tmp7.getYC()*75)+20)))) {
+            moves.push(validM2);
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp7.getXC()*75)+20), (((tmp7.getYC()*75)+20)))) {
+            moves.push(validM2);
+          }
         }
       }
     }
@@ -424,8 +534,15 @@ private Stack getKingSquares(int x, int y, String piece){
         moves.push(validM3);
       }
       else{
-        if(checkWhiteOponent(((tmp8.getXC()*75)+20), (((tmp8.getYC()*75)+20)))){
-          moves.push(validM3);
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp8.getXC()*75)+20), (((tmp8.getYC()*75)+20)))) {
+            moves.push(validM3);
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp8.getXC()*75)+20), (((tmp8.getYC()*75)+20)))) {
+            moves.push(validM3);
+          }
         }
       }
     }
@@ -522,12 +639,20 @@ private Stack getRookMoves(int x, int y, String piece){
         moves.push(validM);
       }
       else{
-        if(checkWhiteOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
-          moves.push(validM);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
+            moves.push(validM);
+            break;
+          }
         }
-        else{
-          break;
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
+            moves.push(validM);
+            break;
+          }
+          else{
+            break;
+          }
         }
       }
     }
@@ -542,12 +667,20 @@ private Stack getRookMoves(int x, int y, String piece){
         moves.push(validM2);
       }
       else{
-        if(checkWhiteOponent(((tmp2.getXC()*75)+20), ((tmp2.getYC()*75)+20))){
-          moves.push(validM2);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp2.getXC()*75)+20), ((tmp2.getYC()*75)+20))){
+            moves.push(validM2);
+            break;
+          }
         }
-        else{
-          break;
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp2.getXC()*75)+20), ((tmp2.getYC()*75)+20))){
+            moves.push(validM2);
+            break;
+          }
+          else{
+            break;
+          }
         }
       }
     }
@@ -562,13 +695,22 @@ private Stack getRookMoves(int x, int y, String piece){
         moves.push(validM3);
       }
       else{
-        if(checkWhiteOponent(((tmp3.getXC()*75)+20), ((tmp3.getYC()*75)+20))){
-          moves.push(validM3);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp3.getXC()*75)+20), ((tmp3.getYC()*75)+20))){
+            moves.push(validM3);
+            break;
+          }
         }
-        else{
-          break;
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp3.getXC()*75)+20), ((tmp3.getYC()*75)+20))){
+            moves.push(validM3);
+            break;
+          }
+          else{
+            break;
+          }
         }
+
       }
     }
   }//end of the loop with x increasing and Y doing nothing...
@@ -582,9 +724,17 @@ private Stack getRookMoves(int x, int y, String piece){
         moves.push(validM4);
       }
       else{
-        if(checkWhiteOponent(((tmp4.getXC()*75)+20), ((tmp4.getYC()*75)+20))){
-          moves.push(validM4);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp4.getXC()*75)+20), ((tmp4.getYC()*75)+20))){
+            moves.push(validM4);
+            break;
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp4.getXC()*75)+20), ((tmp4.getYC()*75)+20))){
+            moves.push(validM4);
+            break;
+          }
         }
         else{
           break;
@@ -657,9 +807,17 @@ private Stack getBishopMoves(int x, int y, String piece){
         moves.push(validM);
       }
       else{
-        if(checkWhiteOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
-          moves.push(validM);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
+            moves.push(validM);
+            break;
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
+            moves.push(validM);
+            break;
+          }
         }
         else{
           break;
@@ -677,9 +835,17 @@ private Stack getBishopMoves(int x, int y, String piece){
         moves.push(validM2);
       }
       else{
-        if(checkWhiteOponent(((tmpK1.getXC()*75)+20), ((tmpK1.getYC()*75)+20))){
-          moves.push(validM2);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmpK1.getXC()*75)+20), ((tmpK1.getYC()*75)+20))){
+            moves.push(validM2);
+            break;
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmpK1.getXC()*75)+20), ((tmpK1.getYC()*75)+20))){
+            moves.push(validM2);
+            break;
+          }
         }
         else{
           break;
@@ -697,9 +863,17 @@ private Stack getBishopMoves(int x, int y, String piece){
         moves.push(validM3);
       }
       else{
-        if(checkWhiteOponent(((tmpLMov2.getXC()*75)+20), ((tmpLMov2.getYC()*75)+20))){
-          moves.push(validM3);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmpLMov2.getXC()*75)+20), ((tmpLMov2.getYC()*75)+20))){
+            moves.push(validM3);
+            break;
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmpLMov2.getXC()*75)+20), ((tmpLMov2.getYC()*75)+20))){
+            moves.push(validM3);
+            break;
+          }
         }
         else{
           break;
@@ -717,9 +891,17 @@ private Stack getBishopMoves(int x, int y, String piece){
         moves.push(validM4);
       }
       else{
-        if(checkWhiteOponent(((tmpNmov2.getXC()*75)+20), ((tmpNmov2.getYC()*75)+20))){
-          moves.push(validM4);
-          break;
+        if(piece.contains("White")){
+          if(checkWhiteOponent(((tmpNmov2.getXC()*75)+20), ((tmpNmov2.getYC()*75)+20))){
+            moves.push(validM4);
+            break;
+          }
+        }
+        else if (piece.contains("Black")){
+          if(checkBlackOponent(((tmpNmov2.getXC()*75)+20), ((tmpNmov2.getYC()*75)+20))){
+            moves.push(validM4);
+            break;
+          }
         }
         else{
           break;
@@ -766,6 +948,11 @@ private Stack getKnightMoves(int x, int y, String piece){
     else if(piecePresent(((tmp.getXC()*75)+20), (((tmp.getYC()*75)+20)))){
       if(piece.contains("White")){
         if(checkWhiteOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
+          attackingMove.push(tmpmove);
+        }
+      }
+      else if (piece.contains("Black")){
+        if(checkBlackOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
           attackingMove.push(tmpmove);
         }
       }
@@ -826,6 +1013,31 @@ private void getLandingSquares(Stack found){
           icon = chessPiece.getIcon().toString();
           pieceName = icon.substring(0, (icon.length()-4));
           if(pieceName.contains("White")){
+            Square stmp = new Square(x, y, pieceName);
+            squares.push(stmp);
+          }
+        }
+      }
+    }
+    return squares;
+  }
+
+  private Stack findBlackPieces(){
+    Stack squares = new Stack();
+    String icon;
+    int x;
+    int y;
+    String pieceName;
+    for(int i=0;i < 600;i+=75){
+      for(int j=0;j < 600;j+=75){
+        y = i/75;
+        x=j/75;
+        Component tmp = chessBoard.findComponentAt(j, i);
+        if(tmp instanceof JLabel){
+          chessPiece = (JLabel)tmp;
+          icon = chessPiece.getIcon().toString();
+          pieceName = icon.substring(0, (icon.length()-4));
+          if(pieceName.contains("Black")){
             Square stmp = new Square(x, y, pieceName);
             squares.push(stmp);
           }
@@ -963,6 +1175,43 @@ private void printStack(Stack input){
   }
 }
 
+  private Stack getBlackMoves(Stack blackPieceSquares){
+    Stack completeMoves = new Stack();
+    Move tmp;
+    while(!blackPieceSquares.empty()){
+      Square s = (Square)blackPieceSquares.pop();
+      String tmpString = s.getName();
+      Stack tmpMoves = new Stack();
+      /*
+          We need to identify all the possible moves that can be made by the AI Opponent
+      */
+      if(tmpString.contains("BlackKnight")){
+        tmpMoves = getKnightMoves(s.getXC(), s.getYC(), s.getName());
+      }
+      else if(tmpString.contains("BlackBishop")){
+        tmpMoves = getBishopMoves(s.getXC(), s.getYC(), s.getName());
+      }
+      else if(tmpString.contains("BlackPawn")){
+        tmpMoves = getBlackPawnSquares(s.getXC(), s.getYC(), s.getName());
+      }
+      else if(tmpString.contains("BlackRook")){
+        tmpMoves = getRookMoves(s.getXC(), s.getYC(), s.getName());
+      }
+      else if(tmpString.contains("BlackQueen")){
+        tmpMoves = getQueenMoves(s.getXC(),s.getYC(),s.getName());
+      }
+      else if(tmpString.contains("BlackKing")){
+        tmpMoves = getKingSquares(s.getXC(), s.getYC(), s.getName());
+      }
+
+      while(!tmpMoves.empty()){
+        tmp = evaluateMove((Move)tmpMoves.pop());
+        completeMoves.push(tmp);
+      }
+    }
+    return completeMoves;
+  }
+
 private Stack getWhiteMoves(Stack whitePieceSquares){
   Stack completeMoves = new Stack();
   Move tmp;
@@ -1006,13 +1255,14 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
       When the AI Agent decides on a move, a red border shows the square from where the move started and the
       landing square of the move.
     */
-
+    Stack blackpieceSquares = findBlackPieces();
+    Stack blackMoves = getBlackMoves(blackpieceSquares);
     resetBorders();
     layeredPane.validate();
     layeredPane.repaint();
     Stack white = findWhitePieces();
     Stack completeMoves = getWhiteMoves(white);
-
+    Stack temporary = new Stack();
     temporary = (Stack)completeMoves.clone();
     getLandingSquares(temporary);
     printStack(temporary);
@@ -1024,7 +1274,7 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
       In Chess if you cannot make a valid move but you are not in Check this state is referred to
       as a Stale Mate
 */
-  JOptionPane.showMessageDialog(null, "Cogratulations, you have placed the AI component in a Stale Mate Position");
+  JOptionPane.showMessageDialog(null, "Congratulations, you have placed the AI component in a Stale Mate Position");
   System.exit(0);
 
   }
@@ -1089,13 +1339,24 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
           }
         }
         else{
-          pieces = new JLabel( new ImageIcon(startingPoint.getName()+".png") );
-          int landingPanelID = (landingPoint.getYC()*8)+landingPoint.getXC();
-          panels = (JPanel)chessBoard.getComponent(landingPanelID);
-          panels.add(pieces);
-          panels.setBorder(redBorder);
-          layeredPane.validate();
-          layeredPane.repaint();
+          if (startingPoint.getName().equals("WhitePawn") && (landingPoint.getYC() == 7)){
+            pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
+            int landingPanelID = (landingPoint.getYC()*8)+landingPoint.getXC();
+            panels = (JPanel)chessBoard.getComponent(landingPanelID);
+            panels.add(pieces);
+            panels.setBorder(redBorder);
+            layeredPane.validate();
+            layeredPane.repaint();
+          }
+          else {
+            pieces = new JLabel(new ImageIcon(startingPoint.getName() + ".png"));
+            int landingPanelID = (landingPoint.getYC() * 8) + landingPoint.getXC();
+            panels = (JPanel) chessBoard.getComponent(landingPanelID);
+            panels.add(pieces);
+            panels.setBorder(redBorder);
+            layeredPane.validate();
+            layeredPane.repaint();
+          }
         }
         white2Move = false;
   }
@@ -1186,12 +1447,12 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
 	*/
     public void mouseReleased(MouseEvent e) {
         if(chessPiece == null) return;
-
+      Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
         chessPiece.setVisible(false);
 		    Boolean success =false;
         Boolean promotion = false;
         Boolean progression = false;
-        Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
+
 
         String tmp = chessPiece.getIcon().toString();
 		    String pieceName = tmp.substring(0, (tmp.length()-4));
@@ -1830,13 +2091,10 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
 
       if(progression){
         int location = 0 + (e.getX()/75);
-				if (c instanceof JLabel){
-	        Container parent = c.getParent();
-          parent.remove(0);
-					pieces = new JLabel( new ImageIcon("BlackQueen.png") );
-					parent = (JPanel)chessBoard.getComponent(location);
-			    parent.add(pieces);
-				}
+        pieces = new JLabel( new ImageIcon("BlackQueen.png") );
+        panels = (JPanel)chessBoard.getComponent(location);
+        panels.add(pieces);
+
         if(winner !=null){
           JOptionPane.showMessageDialog(null, winner);
           System.exit(0);
