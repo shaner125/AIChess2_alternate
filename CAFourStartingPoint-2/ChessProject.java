@@ -70,12 +70,12 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         }
 
         // Setting up the Initial Chess board.
-/*
+
   	for(int i=8;i < 16; i++){
        		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
 			panels = (JPanel)chessBoard.getComponent(i);
 	        panels.add(pieces);
-		}*/
+		}
 		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
 		panels = (JPanel)chessBoard.getComponent(0);
 	    panels.add(pieces);
@@ -100,11 +100,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
 		panels = (JPanel)chessBoard.getComponent(7);
 	    panels.add(pieces);
-//		for(int i=48;i < 56; i++){
-//       		pieces = new JLabel( new ImageIcon("BlackPawn.png") );
-//			panels = (JPanel)chessBoard.getComponent(i);
-//	        panels.add(pieces);
-//		}
+		for(int i=48;i < 56; i++){
+       		pieces = new JLabel( new ImageIcon("BlackPawn.png") );
+			panels = (JPanel)chessBoard.getComponent(i);
+	        panels.add(pieces);
+		}
 		pieces = new JLabel( new ImageIcon("BlackRook.png") );
 		panels = (JPanel)chessBoard.getComponent(56);
 	    panels.add(pieces);
@@ -835,34 +835,39 @@ private void getLandingSquares(Stack found){
     return squares;
   }
 
-  public int evaluateMove(Move move){
+  public Move evaluateMove(Move move){
     String pieceName;
     String icon;
     int x;
     int y;
     int value = 0;
-
-    Component tmpComp = chessBoard.findComponentAt(move.getLanding().getXC(),move.getLanding().getYC());
-    if (tmpComp instanceof JLabel){
-      chessPiece = (JLabel)tmpComp;
-      icon = chessPiece.getIcon().toString();
-      pieceName = icon.substring(0, (icon.length()-4));
-      switch(pieceName){
-        case"BlackKing" : value += 9000;
+    int pieceValue = 0;
+    String enemyPiece = returnName(move.getLanding().getXC()*75, move.getLanding().getYC()*75);
+    if (enemyPiece != "") {
+      switch (enemyPiece) {
+        case "BlackKing.png":
+          pieceValue += 9000;
           break;
-        case "BlackQueen":value += 900;
+        case "BlackQueen.png":
+          pieceValue += 900;
           break;
-        case "BlackBishop":value += 300;
+        case "BlackBishop.png":
+          pieceValue += 300;
           break;
-        case "BlackRook":value += 500;
+        case "BlackRook.png":
+          pieceValue += 500;
           break;
-        case "BlackKnight":value += 300;
+        case "BlackKnight.png":
+          pieceValue += 300;
           break;
-        case "BlackPawn":value += 100;
+        case "BlackPawn.png":
+          pieceValue += 100;
           break;
-        default:value += 0;
+        default:
+          pieceValue += 0;
       }
     }
+
     for(int i=0;i < 600;i+=75){
       for(int j=0;j < 600;j+=75){
         y = i/75;
@@ -902,7 +907,8 @@ private void getLandingSquares(Stack found){
           }
         }
       }
-      return value;
+      move.setValue(value+pieceValue);
+    return move;
   }
 
 	/*
@@ -957,6 +963,44 @@ private void printStack(Stack input){
   }
 }
 
+private Stack getWhiteMoves(Stack whitePieceSquares){
+  Stack completeMoves = new Stack();
+  Move tmp;
+  while(!whitePieceSquares.empty()){
+    Square s = (Square)whitePieceSquares.pop();
+    String tmpString = s.getName();
+    Stack tmpMoves = new Stack();
+    Stack temporary = new Stack();
+      /*
+          We need to identify all the possible moves that can be made by the AI Opponent
+      */
+    if(tmpString.contains("Knight")){
+      tmpMoves = getKnightMoves(s.getXC(), s.getYC(), s.getName());
+    }
+    else if(tmpString.contains("Bishop")){
+      tmpMoves = getBishopMoves(s.getXC(), s.getYC(), s.getName());
+    }
+    else if(tmpString.contains("Pawn")){
+      tmpMoves = getWhitePawnSquares(s.getXC(), s.getYC(), s.getName());
+    }
+    else if(tmpString.contains("Rook")){
+      tmpMoves = getRookMoves(s.getXC(), s.getYC(), s.getName());
+    }
+    else if(tmpString.contains("Queen")){
+      tmpMoves = getQueenMoves(s.getXC(),s.getYC(),s.getName());
+    }
+    else if(tmpString.contains("King")){
+      tmpMoves = getKingSquares(s.getXC(), s.getYC(), s.getName());
+    }
+
+    while(!tmpMoves.empty()){
+      tmp = evaluateMove((Move)tmpMoves.pop());
+      completeMoves.push(tmp);
+    }
+  }
+  return completeMoves;
+}
+
   private void makeAIMove(){
     /*
       When the AI Agent decides on a move, a red border shows the square from where the move started and the
@@ -967,39 +1011,8 @@ private void printStack(Stack input){
     layeredPane.validate();
     layeredPane.repaint();
     Stack white = findWhitePieces();
-    Stack completeMoves = new Stack();
-    Move tmp;
-    while(!white.empty()){
-      Square s = (Square)white.pop();
-      String tmpString = s.getName();
-      Stack tmpMoves = new Stack();
-      Stack temporary = new Stack();
-      /*
-          We need to identify all the possible moves that can be made by the AI Opponent
-      */
-      if(tmpString.contains("Knight")){
-        tmpMoves = getKnightMoves(s.getXC(), s.getYC(), s.getName());
-      }
-      else if(tmpString.contains("Bishop")){
-        tmpMoves = getBishopMoves(s.getXC(), s.getYC(), s.getName());
-      }
-      else if(tmpString.contains("Pawn")){
-      }
-      else if(tmpString.contains("Rook")){
-        tmpMoves = getRookMoves(s.getXC(), s.getYC(), s.getName());
-      }
-      else if(tmpString.contains("Queen")){
-      tmpMoves = getQueenMoves(s.getXC(),s.getYC(),s.getName());
-      }
-      else if(tmpString.contains("King")){
-        tmpMoves = getKingSquares(s.getXC(), s.getYC(), s.getName());
-      }
+    Stack completeMoves = getWhiteMoves(white);
 
-      while(!tmpMoves.empty()){
-        tmp = (Move)tmpMoves.pop();
-        completeMoves.push(tmp);
-      }
-    }
     temporary = (Stack)completeMoves.clone();
     getLandingSquares(temporary);
     printStack(temporary);
@@ -1022,19 +1035,20 @@ private void printStack(Stack input){
       White. Later when you are finished the continuous assessment you don't need to have such information being printed
       out to the standard output.
     */
-    System.out.println(evaluateBoard());
+
       System.out.println("=============================================================");
       Stack testing = new Stack();
       while(!completeMoves.empty()){
         Move tmpMove = (Move)completeMoves.pop();
+        Move testMove = tmpMove;
         Square s1 = (Square)tmpMove.getStart();
         Square s2 = (Square)tmpMove.getLanding();
-        System.out.println("The "+s1.getName()+" can move from ("+s1.getXC()+", "+s1.getYC()+") to the following square: ("+s2.getXC()+", "+s2.getYC()+")");
+        System.out.println("The "+s1.getName()+" can move from ("+s1.getXC()+", "+s1.getYC()+") to the following square: ("+s2.getXC()+", "+s2.getYC()+") value: "+tmpMove.getValue());
         testing.push(tmpMove);
       }
        System.out.println("=============================================================");
        Border redBorder = BorderFactory.createLineBorder(Color.RED, 3);
-       Move selectedMove = agent.randomMove(testing);
+       Move selectedMove = agent.nextBestMove(testing);
        Square startingPoint = (Square)selectedMove.getStart();
        Square landingPoint = (Square)selectedMove.getLanding();
        int startX1 = (startingPoint.getXC()*75)+20;
