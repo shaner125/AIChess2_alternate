@@ -15,15 +15,10 @@ public class AIAgent{
 */
 
   public Move randomMove(Stack possibilities){
-
-    int moveID = rand.nextInt(possibilities.size());
-    int pool = possibilities.size()-moveID;
-    System.out.println("Agent randomly selected move : "+moveID);
-    for(int i=1;i <pool;i++){
-      possibilities.pop();
+    for (int i = 0; i<3;i++){
+      Collections.shuffle(possibilities);
     }
-    Move selectedMove = (Move)possibilities.pop();
-    return selectedMove;
+    return (Move)possibilities.pop();
   }
 
   public Move nextBestMove(Stack possibilities){

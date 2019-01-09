@@ -71,61 +71,61 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
         // Setting up the Initial Chess board.
 
-//  	for(int i=8;i < 16; i++){
-//       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
-//			panels = (JPanel)chessBoard.getComponent(i);
-//	        panels.add(pieces);
-//		}
-//		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
-//		panels = (JPanel)chessBoard.getComponent(0);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
-//		panels = (JPanel)chessBoard.getComponent(1);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
-//		panels = (JPanel)chessBoard.getComponent(6);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
-//		panels = (JPanel)chessBoard.getComponent(2);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
-//		panels = (JPanel)chessBoard.getComponent(5);
-//	    panels.add(pieces);
+  	for(int i=8;i < 16; i++){
+       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
+			panels = (JPanel)chessBoard.getComponent(i);
+	        panels.add(pieces);
+		}
+		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
+		panels = (JPanel)chessBoard.getComponent(0);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
+		panels = (JPanel)chessBoard.getComponent(1);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("WhiteKnight.png") );
+		panels = (JPanel)chessBoard.getComponent(6);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
+		panels = (JPanel)chessBoard.getComponent(2);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("WhiteBishop.png") );
+		panels = (JPanel)chessBoard.getComponent(5);
+	    panels.add(pieces);
 		pieces = new JLabel( new ImageIcon("WhiteKing.png") );
 		panels = (JPanel)chessBoard.getComponent(3);
 	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
-//		panels = (JPanel)chessBoard.getComponent(4);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
-//		panels = (JPanel)chessBoard.getComponent(7);
-//	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
+		panels = (JPanel)chessBoard.getComponent(4);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
+		panels = (JPanel)chessBoard.getComponent(7);
+	    panels.add(pieces);
 		for(int i=48;i < 56; i++){
        		pieces = new JLabel( new ImageIcon("BlackPawn.png") );
 			panels = (JPanel)chessBoard.getComponent(i);
 	        panels.add(pieces);
 		}
-//		pieces = new JLabel( new ImageIcon("BlackRook.png") );
-//		panels = (JPanel)chessBoard.getComponent(56);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
-//		panels = (JPanel)chessBoard.getComponent(57);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
-//		panels = (JPanel)chessBoard.getComponent(62);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
-//		panels = (JPanel)chessBoard.getComponent(58);
-//	    panels.add(pieces);
-//		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
-//		panels = (JPanel)chessBoard.getComponent(61);
-//	    panels.add(pieces);
-//		  pieces = new JLabel( new ImageIcon("BlackKing.png") );
-//		  panels = (JPanel)chessBoard.getComponent(59);
-//	    panels.add(pieces);
-//		  pieces = new JLabel( new ImageIcon("BlackQueen.png") );
-//		  panels = (JPanel)chessBoard.getComponent(60);
-//	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("BlackRook.png") );
+		panels = (JPanel)chessBoard.getComponent(56);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
+		panels = (JPanel)chessBoard.getComponent(57);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("BlackKnight.png") );
+		panels = (JPanel)chessBoard.getComponent(62);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
+		panels = (JPanel)chessBoard.getComponent(58);
+	    panels.add(pieces);
+		pieces = new JLabel( new ImageIcon("BlackBishop.png") );
+		panels = (JPanel)chessBoard.getComponent(61);
+	    panels.add(pieces);
+		  pieces = new JLabel( new ImageIcon("BlackKing.png") );
+		  panels = (JPanel)chessBoard.getComponent(59);
+	    panels.add(pieces);
+		  pieces = new JLabel( new ImageIcon("BlackQueen.png") );
+		  panels = (JPanel)chessBoard.getComponent(60);
+	    panels.add(pieces);
 		  pieces = new JLabel( new ImageIcon("BlackRook.png") );
 		  panels = (JPanel)chessBoard.getComponent(63);
 	    panels.add(pieces);
@@ -644,8 +644,11 @@ private Stack getRookMoves(int x, int y, String piece){
             moves.push(validM);
             break;
           }
+          else{
+            break;
+          }
         }
-        else if (piece.contains("Black")){
+        else{
           if(checkBlackOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
             moves.push(validM);
             break;
@@ -672,8 +675,11 @@ private Stack getRookMoves(int x, int y, String piece){
             moves.push(validM2);
             break;
           }
+          else{
+            break;
+          }
         }
-        else if (piece.contains("Black")){
+        else{
           if(checkBlackOponent(((tmp2.getXC()*75)+20), ((tmp2.getYC()*75)+20))){
             moves.push(validM2);
             break;
@@ -700,8 +706,11 @@ private Stack getRookMoves(int x, int y, String piece){
             moves.push(validM3);
             break;
           }
+          else{
+            break;
+          }
         }
-        else if (piece.contains("Black")){
+        else{
           if(checkBlackOponent(((tmp3.getXC()*75)+20), ((tmp3.getYC()*75)+20))){
             moves.push(validM3);
             break;
@@ -729,16 +738,20 @@ private Stack getRookMoves(int x, int y, String piece){
             moves.push(validM4);
             break;
           }
-        }
-        else if (piece.contains("Black")){
-          if(checkBlackOponent(((tmp4.getXC()*75)+20), ((tmp4.getYC()*75)+20))){
-            moves.push(validM4);
+          else{
             break;
           }
         }
         else{
-          break;
+          if(checkBlackOponent(((tmp4.getXC()*75)+20), ((tmp4.getYC()*75)+20))){
+            moves.push(validM4);
+            break;
+          }
+          else{
+            break;
+          }
         }
+
       }
     }
   }//end of the loop with x increasing and Y doing nothing...
@@ -812,15 +825,18 @@ private Stack getBishopMoves(int x, int y, String piece){
             moves.push(validM);
             break;
           }
+          else{
+            break;
+          }
         }
         else if (piece.contains("Black")){
           if(checkBlackOponent(((tmp.getXC()*75)+20), ((tmp.getYC()*75)+20))){
             moves.push(validM);
             break;
           }
-        }
-        else{
-          break;
+          else{
+            break;
+          }
         }
       }
     }
@@ -840,15 +856,18 @@ private Stack getBishopMoves(int x, int y, String piece){
             moves.push(validM2);
             break;
           }
+          else{
+            break;
+          }
         }
         else if (piece.contains("Black")){
           if(checkBlackOponent(((tmpK1.getXC()*75)+20), ((tmpK1.getYC()*75)+20))){
             moves.push(validM2);
             break;
           }
-        }
-        else{
-          break;
+          else{
+            break;
+          }
         }
       }
     }
@@ -868,15 +887,18 @@ private Stack getBishopMoves(int x, int y, String piece){
             moves.push(validM3);
             break;
           }
+          else{
+            break;
+          }
         }
         else if (piece.contains("Black")){
           if(checkBlackOponent(((tmpLMov2.getXC()*75)+20), ((tmpLMov2.getYC()*75)+20))){
             moves.push(validM3);
             break;
           }
-        }
-        else{
-          break;
+          else{
+            break;
+          }
         }
       }
     }
@@ -896,15 +918,18 @@ private Stack getBishopMoves(int x, int y, String piece){
             moves.push(validM4);
             break;
           }
+          else{
+            break;
+          }
         }
         else if (piece.contains("Black")){
           if(checkBlackOponent(((tmpNmov2.getXC()*75)+20), ((tmpNmov2.getYC()*75)+20))){
             moves.push(validM4);
             break;
           }
-        }
-        else{
-          break;
+          else{
+            break;
+          }
         }
       }
     }
@@ -1298,7 +1323,7 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
       }
        System.out.println("=============================================================");
        Border redBorder = BorderFactory.createLineBorder(Color.RED, 3);
-       Move selectedMove = agent.nextBestMove(testing);
+       Move selectedMove = agent.randomMove(testing);
        Square startingPoint = (Square)selectedMove.getStart();
        Square landingPoint = (Square)selectedMove.getLanding();
        int startX1 = (startingPoint.getXC()*75)+20;
