@@ -1,19 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import java.util.Stack;
 import javax.swing.*;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.ImageIcon;
-import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 
 /*
 	This class can be used as a starting point for creating your Chess game project. The only piece that
@@ -71,11 +65,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
         // Setting up the Initial Chess board.
 
-  	for(int i=8;i < 16; i++){
-       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
-			panels = (JPanel)chessBoard.getComponent(i);
-	        panels.add(pieces);
-		}
+//  	for(int i=8;i < 16; i++){
+//       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
+//			panels = (JPanel)chessBoard.getComponent(i);
+//	        panels.add(pieces);
+//		}
 		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
 		panels = (JPanel)chessBoard.getComponent(0);
 	    panels.add(pieces);
@@ -134,6 +128,86 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
       agent = new AIAgent();
       agentwins = false;
       temporary = new Stack();
+    }
+
+    //Checks for attacking Knights
+    private Boolean knightCheck(int xPos, int yPos, String opponentColour) {
+        for (int i = -75; i <= 75; i += 150) {
+            for (int j = -75; j <= 75; j += 150) {
+                if (returnName(xPos + i, yPos + (j * 2)).contains(opponentColour + "Knight")) {
+                    System.out.println("king would be in check!");
+                    return true;
+                } else if (returnName(xPos + (i * 2), yPos + j).contains(opponentColour + "Knight")) {
+                    System.out.println("king would be in check!");
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+    //Checks for Attacking pieces on vertical and horizontal planes.
+    private Boolean straightCheck(int xPos, int yPos, String opponentColour) {
+        for (int i = -75; i <= 75; i += 150) {
+            int newXPos = xPos;
+            int newYPos = yPos;
+
+            //horizontal check
+            String pieceName = "";
+            while (pieceName.isEmpty()) {
+                newXPos += i;
+                pieceName = returnName(newXPos, yPos);
+            }
+            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
+                System.out.println("King would be in check!");
+                return true;
+            }
+            //Vertical check
+            pieceName = "";
+            while (pieceName.isEmpty()) {
+                newYPos += i;
+                pieceName = returnName(xPos, newYPos);
+            }
+            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
+                System.out.println("King would be in check!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Checks for diagonally attacking pieces.
+    private Boolean diagonalCheck(int xPos, int yPos, String opponentColour) {
+        int newYPos = yPos;
+        int newXPos = xPos;
+        for (int i = -75; i <= 75; i += 150) {
+            for (int j = -75; j <= 75; j += 150) {
+                String pieceName = "";
+                while (pieceName.isEmpty()) {
+                    newXPos += i;
+                    newYPos += j;
+                    pieceName = returnName(newXPos, newYPos);
+                }
+                if (pieceName.contains(opponentColour + "Pawn") && (j == (opponentColour.equals("White") ? -75 : 75)) && (Math.abs(newYPos - yPos) == 75)) {
+                    System.out.println("king would be in check!");
+                    return true;
+                } else if (pieceName.contains(opponentColour + "Bishop") || pieceName.contains(opponentColour + "Queen")) {
+                    System.out.println("king would be in check!");
+                    return true;
+                }
+                newYPos = yPos;
+                newXPos = xPos;
+            }
+        }
+
+
+        return false;
+    }
+
+    //Executes methods to assess whether king is in check.
+    private Boolean isKingInCheck(int xPos, int yPos, String opponentColour) {
+        return knightCheck(xPos, yPos, opponentColour) || straightCheck(xPos, yPos, opponentColour) || diagonalCheck(xPos, yPos, opponentColour);
     }
 
 /*
@@ -1006,7 +1080,7 @@ private void colorSquares(Stack squares){
 /*
     Method to get the landing square of a bunch of moves...
 */
-private void getLandingSquares(Stack found){
+private void getLandingSquaresForColor(Stack found){
   Move tmp;
   Square landing;
   Stack squares = new Stack();
@@ -1016,6 +1090,18 @@ private void getLandingSquares(Stack found){
     squares.push(landing);
   }
   colorSquares(squares);
+}
+
+private Stack getLandingSquares(Stack moves){
+    Move tmp;
+    Square landing;
+    Stack squares = new Stack();
+    while(!moves.empty()){
+        tmp = (Move)moves.pop();
+        landing = (Square)tmp.getLanding();
+        squares.push(landing);
+    }
+    return squares;
 }
 
 
@@ -1200,7 +1286,32 @@ private void printStack(Stack input){
   }
 }
 
-  private Stack getBlackMoves(Stack blackPieceSquares){
+private boolean checkKing(Move move, String color) {
+    Square landingPoint = (Square)move.getLanding();
+    if(color.contains("White")){
+        Stack blackMoves = getBlackMoves(findBlackPieces());
+        Stack vulnerableSquares = getLandingSquares(blackMoves);
+        while (!vulnerableSquares.isEmpty()){
+            Square tmp = (Square)vulnerableSquares.pop();
+            if((tmp.getXC() == landingPoint.getXC()) && (tmp.getYC() == landingPoint.getYC())){
+                return true;
+            }
+        }
+    }
+    else{
+        Stack vulnerableSquares = getLandingSquares(getWhiteMoves(findWhitePieces()));
+        while (!vulnerableSquares.isEmpty()){
+            Square tmp = (Square)vulnerableSquares.pop();
+            if(tmp.equals(landingPoint)){
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+private Stack getBlackMoves(Stack blackPieceSquares){
     Stack completeMoves = new Stack();
     Move tmp;
     while(!blackPieceSquares.empty()){
@@ -1269,7 +1380,8 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
 
     while(!tmpMoves.empty()){
       tmp = evaluateMove((Move)tmpMoves.pop());
-      completeMoves.push(tmp);
+          completeMoves.push(tmp);
+
     }
   }
   return completeMoves;
@@ -1280,8 +1392,7 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
       When the AI Agent decides on a move, a red border shows the square from where the move started and the
       landing square of the move.
     */
-    Stack blackpieceSquares = findBlackPieces();
-    Stack blackMoves = getBlackMoves(blackpieceSquares);
+    Stack blackMoves = getBlackMoves(findBlackPieces());
     resetBorders();
     layeredPane.validate();
     layeredPane.repaint();
@@ -1289,7 +1400,7 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
     Stack completeMoves = getWhiteMoves(white);
     Stack temporary = new Stack();
     temporary = (Stack)completeMoves.clone();
-    getLandingSquares(temporary);
+    getLandingSquaresForColor(temporary);
     printStack(temporary);
 /*
   So now we should have a copy of all the possible moves to make in our Stack called completeMoves
@@ -1319,7 +1430,14 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
         Square s1 = (Square)tmpMove.getStart();
         Square s2 = (Square)tmpMove.getLanding();
         System.out.println("The "+s1.getName()+" can move from ("+s1.getXC()+", "+s1.getYC()+") to the following square: ("+s2.getXC()+", "+s2.getYC()+") value: "+tmpMove.getValue());
-        testing.push(tmpMove);
+        if (s1.getName().contains("King")){
+            if(checkKing(tmpMove, "White")){
+                System.out.println(" - Move discarded as it would place King in check");
+            }
+        }
+        else{
+            testing.push(tmpMove);
+        }
       }
        System.out.println("=============================================================");
        Border redBorder = BorderFactory.createLineBorder(Color.RED, 3);
@@ -1767,41 +1885,41 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
             if(((landingX < 0) || (landingX > 7))||((landingY < 0)||(landingY > 7))){
               validMove = false;
             }
-            else{
-              if((xMovement > 1) || (yMovement > 1)){
-                validMove = false;
-              }
-              else{
+            else {
+                if ((xMovement > 1) || (yMovement > 1)) {
+                    validMove = false;
+                } else {
                 /*
                     The Kind can only move one square at a time but also needs to make sure that there is at least one square between
                     both Kings once the move has concluded.
                 */
-                if((getPieceName((e.getX()+75), e.getY()).contains("King"))||(getPieceName((e.getX()-75), e.getY()).contains("King"))||(getPieceName((e.getX()),(e.getY()+75)).contains("King"))||(getPieceName((e.getX()), (e.getY()-75)).contains("King"))||(getPieceName((e.getX()+75),(e.getY()+75)).contains("King"))||(getPieceName((e.getX()-75),(e.getY()+75)).contains("King"))||(getPieceName((e.getX()+75),(e.getY()-75)).contains("King"))||(getPieceName((e.getX()-75), (e.getY()-75)).contains("King"))){
+                    if ((getPieceName((e.getX() + 75), e.getY()).contains("King")) || (getPieceName((e.getX() - 75), e.getY()).contains("King")) || (getPieceName((e.getX()), (e.getY() + 75)).contains("King")) || (getPieceName((e.getX()), (e.getY() - 75)).contains("King")) || (getPieceName((e.getX() + 75), (e.getY() + 75)).contains("King")) || (getPieceName((e.getX() - 75), (e.getY() + 75)).contains("King")) || (getPieceName((e.getX() + 75), (e.getY() - 75)).contains("King")) || (getPieceName((e.getX() - 75), (e.getY() - 75)).contains("King"))) {
                         validMove = false;
-                }
-                else{
+                    } else {
+                        if (isKingInCheck(e.getX(), e.getY(), "White")) {
+                            validMove = false;
+                        } else {
                   /*
                       We need to make sure that if there is a piece on the potential landing square that the King cannot takes its
                       own piece but can take an opponents piece.
                   */
-                  if(piecePresent(e.getX(), e.getY())){
-                          if(pieceName.contains("White")){
-                            if(checkWhiteOponent(e.getX(), e.getY())){
-                              validMove = true;
+                            if (piecePresent(e.getX(), e.getY())) {
+                                if (pieceName.contains("White")) {
+                                    if (checkWhiteOponent(e.getX(), e.getY())) {
+                                        validMove = true;
+                                    }
+                                } else {
+                                    if (checkBlackOponent(e.getX(), e.getY())) {
+                                        validMove = true;
+                                    }
+                                }
+                            } else {
+                                validMove = true;
                             }
-                          }
-                          else{
-                            if(checkBlackOponent(e.getX(), e.getY())){
-                              validMove = true;
-                            }
-                          }
                         }
-                        else{
-                          validMove = true;
-                        }
-                      }
                     }
-                  }
+                }
+            }
           }//end of zero distance check
         }
         else if(pieceName.contains("Queen")){

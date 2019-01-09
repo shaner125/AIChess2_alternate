@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="93134027-0cc4-4ec1-8796-90c0555fd947" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AIAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AIAgent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChessProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChessProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAFourStartingPoint-2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAFourStartingPoint-2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAFourStartingPoint-2/AIAgent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAFourStartingPoint-2/AIAgent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAFourStartingPoint-2/ChessProject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAFourStartingPoint-2/ChessProject.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,14 +37,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1930" />
-          <entry key="txt" value="80" />
+          <entry key="java" value="3134" />
+          <entry key="txt" value="254" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1930" />
-          <entry key="PLAIN_TEXT" value="80" />
+          <entry key="JAVA" value="3134" />
+          <entry key="PLAIN_TEXT" value="254" />
         </counts>
       </usages-collector>
     </session>
@@ -58,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ChessProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-357">
-              <caret line="99" selection-start-line="99" selection-end-line="101" selection-end-column="27" />
+            <state relative-caret-position="735">
+              <caret line="1921" column="13" selection-start-line="1921" selection-start-column="13" selection-end-line="1921" selection-end-column="13" />
               <folding>
                 <element signature="e#4882#7234#0" />
                 <element signature="e#7238#9194#0" />
@@ -68,6 +64,22 @@
                 <element signature="e#11270#20916#0" />
                 <element signature="e#20919#21704#0" />
                 <element signature="e#21706#28862#0" />
+                <element signature="e#28864#35881#0" />
+                <element signature="e#35884#37590#0" />
+                <element signature="e#37593#37970#0" />
+                <element signature="e#37983#38314#0" />
+                <element signature="e#38316#38571#0" />
+                <element signature="e#38298#39000#0" />
+                <element signature="e#39004#39659#0" />
+                <element signature="e#39663#41815#0" />
+                <element signature="e#41818#42071#0" />
+                <element signature="e#42074#42468#0" />
+                <element signature="e#42472#42686#0" />
+                <element signature="e#42690#43108#0" />
+                <element signature="e#43112#44404#0" />
+                <element signature="e#45546#46792#0" />
+                <element signature="e#85289#85290#0" expanded="true" />
+                <element signature="e#85343#85344#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,6 +120,8 @@
       <find>eval</find>
       <find>getwhitepaw</find>
       <find>getwhitemove</find>
+      <find>blackmov</find>
+      <find>layeredpan</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -131,10 +145,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="55" />
-    <option name="width" value="1850" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="185" />
+    <option name="y" value="130" />
+    <option name="width" value="1440" />
+    <option name="height" value="765" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -179,7 +194,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546571320425" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547073665459" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="Errors" />
@@ -224,7 +239,7 @@
       <workItem from="1546052237261" duration="3474000" />
       <workItem from="1546566508741" duration="2139000" />
       <workItem from="1546901577264" duration="6647000" />
-      <workItem from="1547060333420" duration="2740000" />
+      <workItem from="1547060333420" duration="11632000" />
     </task>
     <task id="LOCAL-00001" summary="fixed evaluation function, linked up random moves and next best move properly.">
       <created>1546909001390</created>
@@ -233,11 +248,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546909001390</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed getMoves methods for all pieces to prevent them jumping over others incorrectly, changed random move method to shuffle stack for randomization.">
+      <created>1547064529743</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1547064529744</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15138000" />
+    <option name="totallyTimeSpent" value="24030000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -249,10 +271,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="55" y="0" width="1850" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27653632" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26385927" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -261,14 +283,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.40087622" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4030668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3383948" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.47071582" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32968238" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32968238" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49946696" weight="0.329718" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49946696" weight="0.32968238" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053304" side_tool="true" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -290,118 +312,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed evaluation function, linked up random moves and next best move properly." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed evaluation function, linked up random moves and next best move properly." />
+    <MESSAGE value="Fixed getMoves methods for all pieces to prevent them jumping over others incorrectly, changed random move method to shuffle stack for randomization." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed getMoves methods for all pieces to prevent them jumping over others incorrectly, changed random move method to shuffle stack for randomization." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>643</line>
-          <properties />
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>644</line>
-          <properties />
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>642</line>
-          <properties />
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>683</line>
-          <properties />
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>674</line>
-          <properties />
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>703</line>
-          <properties />
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>735</line>
-          <properties />
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>736</line>
-          <properties />
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>738</line>
-          <properties />
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>737</line>
-          <properties />
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>744</line>
-          <properties />
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>745</line>
-          <properties />
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>746</line>
-          <properties />
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>747</line>
-          <properties />
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>704</line>
-          <properties />
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>705</line>
-          <properties />
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ChessProject.java</url>
-          <line>706</line>
-          <properties />
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-      </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="pieceValue" />
@@ -434,8 +348,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ChessProject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="99" selection-start-line="99" selection-end-line="101" selection-end-column="27" />
+        <state relative-caret-position="735">
+          <caret line="1921" column="13" selection-start-line="1921" selection-start-column="13" selection-end-line="1921" selection-end-column="13" />
           <folding>
             <element signature="e#4882#7234#0" />
             <element signature="e#7238#9194#0" />
@@ -444,6 +358,22 @@
             <element signature="e#11270#20916#0" />
             <element signature="e#20919#21704#0" />
             <element signature="e#21706#28862#0" />
+            <element signature="e#28864#35881#0" />
+            <element signature="e#35884#37590#0" />
+            <element signature="e#37593#37970#0" />
+            <element signature="e#37983#38314#0" />
+            <element signature="e#38316#38571#0" />
+            <element signature="e#38298#39000#0" />
+            <element signature="e#39004#39659#0" />
+            <element signature="e#39663#41815#0" />
+            <element signature="e#41818#42071#0" />
+            <element signature="e#42074#42468#0" />
+            <element signature="e#42472#42686#0" />
+            <element signature="e#42690#43108#0" />
+            <element signature="e#43112#44404#0" />
+            <element signature="e#45546#46792#0" />
+            <element signature="e#85289#85290#0" expanded="true" />
+            <element signature="e#85343#85344#0" expanded="true" />
           </folding>
         </state>
       </provider>
