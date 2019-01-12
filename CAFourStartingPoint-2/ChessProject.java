@@ -24,6 +24,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 	  int startY;
 	  int initialX;
 	  int initialY;
+	  static int choice;
 	  JPanel panels;
 	  JLabel pieces;
     Boolean win;
@@ -65,11 +66,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
         // Setting up the Initial Chess board.
 
-//  	for(int i=8;i < 16; i++){
-//       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
-//			panels = (JPanel)chessBoard.getComponent(i);
-//	        panels.add(pieces);
-//		}
+  	for(int i=8;i < 16; i++){
+       		pieces = new JLabel( new ImageIcon("WhitePawn.png") );
+			panels = (JPanel)chessBoard.getComponent(i);
+	        panels.add(pieces);
+		}
 		pieces = new JLabel( new ImageIcon("WhiteRook.png") );
 		panels = (JPanel)chessBoard.getComponent(0);
 	    panels.add(pieces);
@@ -128,6 +129,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
       agent = new AIAgent();
       agentwins = false;
       temporary = new Stack();
+      choice = 0;
     }
 
     //Checks for attacking Knights
@@ -1158,7 +1160,7 @@ private Stack getLandingSquares(Stack moves){
     return squares;
   }
 
-  public Move evaluateMove(Move move){
+  public Move evaluateWhiteMove(Move move){
     String pieceName;
     String icon;
     int x;
@@ -1233,6 +1235,130 @@ private Stack getLandingSquares(Stack moves){
       move.setValue(value+pieceValue);
     return move;
   }
+
+  public int evaluateBlackMove(Move move){
+        String pieceName;
+        String icon;
+        int x;
+        int y;
+        int value = 0;
+        int pieceValue = 0;
+        String enemyPiece = returnName(move.getLanding().getXC()*75, move.getLanding().getYC()*75);
+        if (enemyPiece != "") {
+            switch (enemyPiece) {
+                case "WhiteKing.png":
+                    pieceValue += 9000;
+                    break;
+                case "WhiteQueen.png":
+                    pieceValue += 900;
+                    break;
+                case "WhiteBishop.png":
+                    pieceValue += 300;
+                    break;
+                case "WhiteRook.png":
+                    pieceValue += 500;
+                    break;
+                case "WhiteKnight.png":
+                    pieceValue += 300;
+                    break;
+                case "WhitePawn.png":
+                    pieceValue += 100;
+                    break;
+                default:
+                    pieceValue += 0;
+            }
+        }
+
+        for(int i=0;i < 600;i+=75){
+            for(int j=0;j <600;j+=75){
+                y = i/75;
+                x=j/75;
+                Component tmp = chessBoard.findComponentAt(j, i);
+                if(tmp instanceof JLabel){
+                    chessPiece = (JLabel)tmp;
+                    icon = chessPiece.getIcon().toString();
+                    pieceName = icon.substring(0, (icon.length()-4));
+                    switch(pieceName){
+                        case "WhiteKing": value -= 9000;
+                            break;
+                        case"BlackKing" : value += 9000;
+                            break;
+                        case "WhiteQueen": value -= 900;
+                            break;
+                        case "BlackQueen":value += 900;
+                            break;
+                        case "WhiteBishop":value -= 300;
+                            break;
+                        case "BlackBishop":value += 300;
+                            break;
+                        case "WhiteRook":value -= 500;
+                            break;
+                        case "BlackRook":value += 500;
+                            break;
+                        case "BlackKnight":value += 300;
+                            break;
+                        case "WhiteKnight":value -= 300;
+                            break;
+                        case "WhitePawn":value -= 100;
+                            break;
+                        case "BlackPawn":value += 100;
+                            break;
+                        default:value += 0;
+                    }
+                }
+            }
+        }
+        return value + pieceValue;
+    }
+
+  public int evaluateBoard(){
+        String pieceName;
+        String icon;
+        int x;
+        int y;
+        int value = 0;
+        for(int i=0;i < 600;i+=75){
+            for(int j=0;j < 600;j+=75){
+                y = i/75;
+                x=j/75;
+                Component tmp = chessBoard.findComponentAt(j, i);
+                if(tmp instanceof JLabel){
+                    chessPiece = (JLabel)tmp;
+                    icon = chessPiece.getIcon().toString();
+                    pieceName = icon.substring(0, (icon.length()-4));
+                    switch(pieceName){
+                        case "WhiteKing": value += 9000;
+                            break;
+                        case"BlackKing" : value -= 9000;
+                            break;
+                        case "WhiteQueen": value += 900;
+                            break;
+                        case "BlackQueen":value -= 900;
+                            break;
+                        case "WhiteBishop":value += 300;
+                            break;
+                        case "BlackBishop":value -= 300;
+                            break;
+                        case "WhiteRook":value += 500;
+                            break;
+                        case "BlackRook":value -= 500;
+                            break;
+                        case "BlackKnight":value -= 300;
+                            break;
+                        case "WhiteKnight":value += 300;
+                            break;
+                        case "WhitePawn":value += 100;
+                            break;
+                        case "BlackPawn":value -= 100;
+                            break;
+                        default:value += 0;
+                    }
+                }
+            }
+        }
+
+        return value;
+    }
 
 	/*
 		This method checks if there is a piece present on a particular square.
@@ -1341,7 +1467,7 @@ private Stack getBlackMoves(Stack blackPieceSquares){
       }
 
       while(!tmpMoves.empty()){
-        tmp = evaluateMove((Move)tmpMoves.pop());
+        tmp = evaluateWhiteMove((Move)tmpMoves.pop());
         completeMoves.push(tmp);
       }
     }
@@ -1379,7 +1505,7 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
     }
 
     while(!tmpMoves.empty()){
-      tmp = evaluateMove((Move)tmpMoves.pop());
+      tmp = evaluateWhiteMove((Move)tmpMoves.pop());
           completeMoves.push(tmp);
 
     }
@@ -1392,7 +1518,6 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
       When the AI Agent decides on a move, a red border shows the square from where the move started and the
       landing square of the move.
     */
-    Stack blackMoves = getBlackMoves(findBlackPieces());
     resetBorders();
     layeredPane.validate();
     layeredPane.repaint();
@@ -1402,6 +1527,7 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
     temporary = (Stack)completeMoves.clone();
     getLandingSquaresForColor(temporary);
     printStack(temporary);
+    Move selectedMove = new Move();
 /*
   So now we should have a copy of all the possible moves to make in our Stack called completeMoves
 */
@@ -1434,14 +1560,23 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
             if(checkKing(tmpMove, "White")){
                 System.out.println(" - Move discarded as it would place King in check");
             }
+            else{
+                testing.push(tmpMove);
+            }
         }
         else{
             testing.push(tmpMove);
         }
+
       }
        System.out.println("=============================================================");
        Border redBorder = BorderFactory.createLineBorder(Color.RED, 3);
-       Move selectedMove = agent.randomMove(testing);
+       if (choice == 0){
+           selectedMove = agent.randomMove(testing);
+       }
+       else if (choice == 1){
+           selectedMove = agent.nextBestMove(testing, evaluateBoard());
+       }
        Square startingPoint = (Square)selectedMove.getStart();
        Square landingPoint = (Square)selectedMove.getLanding();
        int startX1 = (startingPoint.getXC()*75)+20;
@@ -2305,8 +2440,8 @@ private Stack getWhiteMoves(Stack whitePieceSquares){
         frame.setLocationRelativeTo( null );
         frame.setVisible(true);
         Object[] options = {"Random Moves","Best Next Move","Based on Opponents Moves"};
-        int n = JOptionPane.showOptionDialog(frame,"Lets play some Chess, choose your AI opponent","Introduction to AI Continuous Assessment", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
-        System.out.println("The selected variable is : "+n);
+        choice = JOptionPane.showOptionDialog(frame,"Lets play some Chess, choose your AI opponent","Introduction to AI Continuous Assessment", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
+        System.out.println("The selected variable is : "+choice);
         frame.makeAIMove();
   }
 }
